@@ -7,6 +7,8 @@
 
 class HW1Functions {
 
+    //function to trim whitespace off of the end of a string
+    //this acts on the string passed to it (in memory) rather than returning a new string which must be reassigned
     function rtrim_value(&$value)
     {
         $value = rtrim($value);
@@ -22,11 +24,12 @@ class HW1Functions {
             if(!$filedata){echo "Failed to read in $filein\n"; return FALSE;}
 
         //remove newline from end of each element
+        //this uses the rtrim_value function defined above by executing it on every element of the array
         array_walk($filedata, array($this, 'rtrim_value'));
 
+        //use PHP's internal sorting function to sort in ascending order
         sort($filedata);
-
-        //print_r($filedata);
+        
 
         //open/create the file
         $fp = fopen($fileout, 'w');
